@@ -1,0 +1,37 @@
+{
+  "sessions": [
+    {
+      "done": true,
+      "date": "09/04/2000",
+      "type": "course",
+      "distance": 10.0,
+      "time": "00:01:00",
+      "pace": 0.1,
+      "commentaires": "Bien"
+    },
+    {
+      "done": false,
+      "date": "Wednesday 09 April 2025",
+      "type": "course",
+      "distance": 15.89,
+      "time": "01:15:00",
+      "pace": 4.72,
+      "commentaires": "Bien bien "
+    },
+    {
+      "done": true,
+      "date": "Dimanche 08 septembre 2019",
+      "type": "salle",
+      "exercices": [
+        {
+          "exercice": "d\u00e9velopp\u00e9 couch\u00e9",
+          "charge": "70 kg",
+          "repetitions": "15",
+          "repos": "1 min 30"
+        }
+      ],
+      "entrainement": "C",
+      "commentaires": "Vieux"
+    }
+  ]
+}

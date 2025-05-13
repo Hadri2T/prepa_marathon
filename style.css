@@ -1,0 +1,43 @@
+/* Mettre le titre au milieu */
+h1 {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Gérer les bordures */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* Mettre les lignes en noir et éloigner le texte des lignes*/
+th, td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Fond verte et écriture blanche en gras dans les cellules */
+th {
+  background-color: #256705;
+  color: white;
+  font-weight: bold;
+}
+
+/* Mettre des majuscules*/
+td {
+  text-transform: capitalize;
+}
+
+/* Style spécial pour les cellules vides (NaN remplacés par vide) */
+td:empty {
+  background-color: #c5c9cd;
+  color: transparent;
+}
+
+/* Rendre le fond moins blanc */
+body {
+  background-color: #c5c9cd;
+  margin: 20px;
+}
