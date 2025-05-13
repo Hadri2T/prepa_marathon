@@ -8,6 +8,7 @@ import os
 import webbrowser
 import locale
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
+from datetime import datetime, timedelta
 
 
 # Variable constante dans laquelle est stockées les séances
@@ -40,24 +41,34 @@ Définition de la fonction pour une nouvelle session de sport:
 """
 def new_session():
 
-    #Utiliser exit pour retourner au menu 
+    #Utiliser exit pour retourner au menu
     session_type = input("Type de séance : ").lower()
     if session_type == "exit" or session_type == "":
         print("Ajout annulé.")
         return
 
     while True:
-        raw_date = input("Date (jj-mm-aaaa) : ") or datetime.today().strftime("%d-%m-%Y")
-        try:
-            date_obj = datetime.strptime(raw_date, "%d-%m-%Y")
-            # Formater : Jeudi 9 avril 2025
-            date = date_obj.strftime("%A %d %B %Y")
-            break  # sortir de la boucle si tout va bien
-        except ValueError:
-            print("Format invalide. Utilise jj-mm-aaaa, ex : 09-04-2025")
+        raw_date = input("Date : ").strip().lower()
+
+        if raw_date in ["", "auj"]:
+            date_obj = datetime.today()
+            break
+        elif raw_date == "hier":
+            date_obj = datetime.today() - timedelta(days=1)
+            break
+        else:
+            try:
+                date_obj = datetime.strptime(raw_date, "%d-%m-%Y")
+                break
+            except ValueError:
+                print("Format invalide. Utilise jj-mm-aaaa, ou 'auj' / 'hier'")
+
+    date = date_obj.strftime("%A %d %B %Y")
+
 
     commentaires = input("Commentaires : ")
-    done = input("Séance faite ? ").lower() == "y"
+    #done = input("Séance faite ? ").lower() == "y"
+    #Pas envie d'avoir la colonne done finalement
 
     if session_type == "course":
         while True:
@@ -79,14 +90,24 @@ def new_session():
         minutes = h * 60 + m + s / 60
         pace = round(minutes / distance, 2)
 
+        if minutes > 90:
+            allure = "Sortie longue"
+        elif pace > 5.30:
+            allure = "EF"
+        else:
+            allure = "Fractionné"
+
+
+
         session = {
-            "done": done,
+            #"done": done,
+            #Pas envie d'avoir la colonne done finalement
             "date": date,
             "type": "course",
             "distance": distance,
             "time": time_str,
             "pace": pace,
-            "commentaires": commentaires
+            "commentaires": f"{allure}, {commentaires}"
         }
 
     elif session_type == "salle":
@@ -110,7 +131,8 @@ def new_session():
 
         entrainement = input("A, B ou C : ")
         session = {
-            "done": done,
+            #"done": done,
+            #Pas envie d'avoir la colonne done finalement
             "date": date,
             "type": "salle",
             "exercices": exercices,
@@ -120,7 +142,8 @@ def new_session():
 
     else:
         session = {
-            "done": done,
+            #"done": done,
+            #Pas envie d'avoir la colonne done finalement
             "date": date,
             "type": session_type,
             "commentaires": commentaires

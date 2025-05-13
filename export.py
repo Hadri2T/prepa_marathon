@@ -4,6 +4,7 @@ import webbrowser
 import json
 import pandas as pd
 from session import base_data, TRAINING
+from datetime import datetime, timedelta
 
 def export_html():
     # Charger les données JSON
@@ -12,12 +13,41 @@ def export_html():
         print("Aucune séance enregistrée.")
         return
 
+    # Calculer la date 7 jours avant aujourd'hui
+    aujourd_hui = datetime.today()
+    semaine_dernière = aujourd_hui - timedelta(days=7)
+
+    # Calcul de la distance totale couru sur les 7 derniers jours
+    distance_totale = 0.0
+    for session in data["sessions"]:
+        if session.get("type") == "course":
+            try:
+                session_date = datetime.strptime(session.get("date"), "%A %d %B %Y")
+                if semaine_dernière <= session_date <= aujourd_hui:
+                    distance_totale += float(session.get("distance", 0))
+            except Exception:
+                pass  # ignore les erreurs de parsing de date
+
+
+    # Calcul du nombre de séances de salle sur les 7 derniers jours
+    nb_salle = 0
+    for session in data["sessions"]:
+        if session.get("type") == "salle":
+            try:
+                session_date = datetime.strptime(session.get("date"), "%A %d %B %Y")
+                if semaine_dernière <= session_date <= aujourd_hui:
+                    nb_salle += 1
+            except Exception:
+                pass
+
+
     rows = []  # Liste de toutes les lignes du futur tableau
 
     for session in data["sessions"]:
         # Création d'une ligne vide avec les colonnes prévues
         row = {
-            "Done": "✅" if session.get("done") else "❌",  # Emoji selon fait ou pas
+            #"Done": "✅" if session.get("done") else "❌"
+            #Pas envie d'avoir la colonne done finalement
             "Date": session.get("date", ""),
             "Course": "",  # Initialement vide
             "Salle": "",
@@ -72,7 +102,7 @@ def export_html():
     html_table = df.to_html(index=False, escape=False)
 
     # Contenu HTML complet avec lien CSS
-    html_complete = f"""
+    html_complet = f"""
     <!DOCTYPE html>
     <html lang="fr">
     <head>
@@ -82,14 +112,22 @@ def export_html():
     </head>
     <body>
         <h1>Tableau des séances</h1>
+        <h3 style='text-align:center'>
+    Nombre de km courus cette semaine : {distance_totale:.2f} km
+    </h3>
+    <h3 style='text-align:center'>
+    Nombre de séances de salle cette semaine : {nb_salle}
+    </h3>
+
         {html_table}
     </body>
     </html>
     """
 
+
     # Écriture dans le fichier HTML
     with open(fichier, "w", encoding="utf-8") as f:
-        f.write(html_complete)
+        f.write(html_complet)
 
     print("Fichier 'seances.html' généré avec style.")
     webbrowser.open("file://" + os.path.realpath(fichier))
