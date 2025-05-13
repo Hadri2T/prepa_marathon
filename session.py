@@ -14,6 +14,28 @@ from datetime import datetime, timedelta
 # Variable constante dans laquelle est stockées les séances
 TRAINING = "training_data.json"
 
+#Dictionnaire pour entrer/modifier mes entrainements de salles
+ENTRAINEMENTS_SALLE = {
+    "A": [
+        {"exercice": "Développé couché", "repos": "120s"},
+        {"exercice": "Tirage horizontal", "repos": "90s"},
+        {"exercice": "Élévations latérales", "repos": "60s"},
+        {"exercice": "Superstet", "repos" : "30s"}
+    ],
+    "B": [
+        {"exercice": "Squat", "repos": "120s"},
+        {"exercice": "Fentes", "repos": "90s"},
+        {"exercice": "Mollets debout", "repos": "60s"},
+        {"exercice": "Superstet", "repos" : "30s"}
+    ],
+    "C": [
+        {"exercice": "Soulevé de terre", "repos": "120s"},
+        {"exercice": "Hip thrust", "repos": "90s"},
+        {"exercice": "Crunchs", "repos": "60s"},
+        {"exercice": "Superstet", "repos" : "30s"}
+    ]
+}
+
 """
 Definition de la fonction de base :
 - Vérifie si le fichier training_data.json existe
@@ -111,25 +133,32 @@ def new_session():
         }
 
     elif session_type == "salle":
+
+        #Demander quel entrainement je fais aujourd'hui
+        entrainement = input("Entrainement du jour ? : ").upper()
+        #Mettre A, B ou C
+
+        if entrainement not in ENTRAINEMENTS_SALLE:
+            print("Entrainement non reconnu")
+            return
+
+        # Liste pour stocker les exercices avec charges et répétitions
         exercices = []
-        print(" Entrainement : ")
 
-        while True:
-            nom = input("Exercice : ")
-            if nom.strip() == "":
-                break
-            charge = input("Charge : ")
-            repetitions = input("Répétitions : ")
-            repos = input("Temps de repos : ")
+        # Parcourt chaque exercice prévu dans l'entraînement choisi
+        for exercice in ENTRAINEMENTS_SALLE[entrainement]:
+            #Enter la charge et le nombre de répétitions
+            charge = input(f"{exercice['exercice']} - Charge : ")
+            repetitions = input(f"{exercice['exercice']} - Répétitions : ")
 
+            #Ajoute l'exercice à la liste
             exercices.append({
-                "exercice": nom,
+                "exercice": exercice["exercice"],
                 "charge": charge,
                 "repetitions": repetitions,
-                "repos": repos
+                "repos": exercice["repos"]
             })
 
-        entrainement = input("A, B ou C : ")
         session = {
             #"done": done,
             #Pas envie d'avoir la colonne done finalement

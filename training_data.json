@@ -1,70 +1,64 @@
 {
   "sessions": [
     {
+      "date": "Lundi 12 mai 2025",
+      "type": "salle",
+      "exercices": [
+        {
+          "exercice": "Superstet",
+          "charge": "10",
+          "repetitions": "15",
+          "repos": "30s"
+        }
+      ],
+      "entrainement": "B",
+      "commentaires": "Test salle"
+    },
+    {
       "date": "Mardi 13 mai 2025",
       "type": "salle",
       "exercices": [
         {
-          "exercice": "Gainage",
-          "charge": "0",
-          "repetitions": "5",
-          "repos": "30 secondes"
-        },
-        {
-          "exercice": "Rowing",
-          "charge": "45",
-          "repetitions": "12",
-          "repos": "1 min 30"
-        },
-        {
-          "exercice": "Squat",
-          "charge": "120 ",
-          "repetitions": "8",
-          "repos": "2 min"
+          "exercice": "Superstet",
+          "charge": "12",
+          "repetitions": "2",
+          "repos": "30s"
         }
       ],
       "entrainement": "B",
-      "commentaires": "Test auj"
-    },
-    {
-      "date": "Mardi 13 mai 2025",
-      "type": "course",
-      "distance": 18.89,
-      "time": "00:23:00",
-      "pace": 1.22,
-      "commentaires": "Test marathon"
+      "commentaires": "Test salle 2"
     },
     {
       "date": "Lundi 12 mai 2025",
-      "type": "course",
-      "distance": 12.45,
-      "time": "01:45:00",
-      "pace": 8.43,
-      "commentaires": "Course de type EF, Test pace"
-    },
-    {
-      "date": "Lundi 12 mai 2025",
-      "type": "course",
-      "distance": 75.0,
-      "time": "01:55:00",
-      "pace": 1.53,
-      "commentaires": "Course de type Sortie longue, Test pace 2 "
-    },
-    {
-      "date": "Lundi 12 mai 2025",
-      "type": "course",
-      "distance": 10.0,
-      "time": "10:00:00",
-      "pace": 60.0,
-      "commentaires": "EF, Test pace 3"
-    },
-    {
-      "date": "Mardi 13 mai 2025",
-      "type": "course",
-      "distance": 10.0,
-      "time": "10:00:00",
-      "pace": 60.0,
-      "commentaires": "Sortie longue, Test pace 4"
+      "type": "salle",
+      "exercices": [
+        {
+          "exercice": "D\u00e9velopp\u00e9 couch\u00e9",
+          "charge": "90",
+          "repetitions": "10",
+          "repos": "120s"
+        },
+        {
+          "exercice": "Tirage horizontal",
+          "charge": "25",
+          "repetitions": "3",
+          "repos": "90s"
+        },
+        {
+          "exercice": "\u00c9l\u00e9vations lat\u00e9rales",
+          "charge": "23",
+          "repetitions": "5",
+          "repos": "60s"
+        },
+        {
+          "exercice": "Superstet",
+          "charge": "23",
+          "repetitions": "5",
+          "repos": "30s"
+        }
+      ],
+      "entrainement": "A",
+      "commentaires": "oui"
     }
   ]
 }

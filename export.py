@@ -68,19 +68,21 @@ def export_html():
         # Si c'est une séance de salle, on remplit la colonne "Salle"
         elif session["type"] == "salle":
             exercices = session.get("exercices", [])
+        # Mise en forme HTML de chaque exercice à la ligne
             details = "<br><br>".join(
                 f"<b>{exo['exercice']}</b><br>"
                 f"Charge : {exo['charge']}<br>"
                 f"Répétitions : {exo['repetitions']}<br>"
                 f"Repos : {exo['repos']}"
                 for exo in exercices
-            )
-            row["Salle"] = (
-                f"{details}<br><br>"
-                f"<b>Type :</b> {session.get('entrainement', '')}<br>"
-                f"<b>Commentaires :</b> {session.get('commentaires', '')}"
-)
+        )
 
+        # Contenu de la cellule "Salle"
+            row["Salle"] = (
+                f"<b>Entraînement : {session.get('entrainement', '')}</b><br><br>"
+                f"{details}<br><br>"
+                f"<b>Commentaires :</b> {session.get('commentaires', '')}"
+    )
 
 
         # Sinon, on place l’info dans la colonne "Autre"
